@@ -12,12 +12,11 @@ jobs:
         with:
           dotnet-version: '8.x'
       - name: Run tests
-        run: |
-          dotnet test MyProject.Tests/ --logger trx --results-directory ./TestResults || true
-          echo "--- TRX files found ---"
-          find . -name "*.trx" 2>/dev/null || echo "none"
+        run: dotnet test MyProject.Tests/ --logger trx --results-directory ./TestResults || true
+      - name: Show test output files
+        run: find . -name "*.trx" -o -name "*.xml" | grep -v ".git" || echo "no result files found"
       - uses: actions/upload-artifact@v4
         with:
           name: mstest-results
-          path: "**/*.trx"
+          path: TestResults/
           if-no-files-found: warn
