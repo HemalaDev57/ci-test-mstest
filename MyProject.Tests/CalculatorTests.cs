@@ -21,5 +21,5 @@ public class CalculatorTests
 
     [TestMethod]
     [ExpectedException(typeof(DivideByZeroException))]
-    public void TestDivideByZero() { int x = 1 / 0; }
+    public void TestDivideByZero() { int zero = 0; int x = 1 / zero; }
 }
